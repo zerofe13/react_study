@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react/cjs/react.production.min';
-import ColorContext, { ColorConsumer } from '../contexts/color';
+import ColorContext from '../contexts/color';
 
 const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 

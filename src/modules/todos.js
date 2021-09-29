@@ -32,7 +32,7 @@ const initialState = {
 const todos = handleActions(
   {
     [CHANGE_INPUT]: (state, action) => ({ ...state, input: action.payload }),
-    // [CHANGE_INPUT]: (state, {paylode:input}) => ({ ...state, input }),
+    // [CHANGE_INPUT]: (state, {paylode:input}) => ({ ...state, input }), 가독성 을 위해 비구조화 할당으로paylode 이름을 새로 설정
     [INSERT]: (state, action) => ({
       ...state,
       todos: state.todos.concat(action.payload),

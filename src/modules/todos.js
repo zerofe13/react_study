@@ -1,3 +1,4 @@
+import produce from 'immer';
 import { createAction, handleActions } from 'redux-actions';
 
 const CHANGE_INPUT = 'todos/CHANGE_INPUT';
@@ -31,22 +32,25 @@ const initialState = {
 };
 const todos = handleActions(
   {
-    [CHANGE_INPUT]: (state, action) => ({ ...state, input: action.payload }),
-    // [CHANGE_INPUT]: (state, {paylode:input}) => ({ ...state, input }), 가독성 을 위해 비구조화 할당으로paylode 이름을 새로 설정
-    [INSERT]: (state, action) => ({
-      ...state,
-      todos: state.todos.concat(action.payload),
-    }),
-    [TOGGLE]: (state, action) => ({
-      ...state,
-      todos: state.todos.map((todo) =>
-        todo.id === action.payload ? { ...todo, done: !todo.done } : todo
-      ),
-    }),
-    [REMOVE]: (state, action) => ({
-      ...state,
-      todos: state.todos.filter((todo) => todo.id !== action.payload),
-    }),
+    [CHANGE_INPUT]: (state, { payload: input }) =>
+      produce(state, (draft) => {
+        draft.input = input;
+      }),
+
+    [INSERT]: (state, { payload: todo }) =>
+      produce(state, (draft) => {
+        draft.todos.push(todo);
+      }),
+    [TOGGLE]: (state, { payload: id }) =>
+      produce(state, (draft) => {
+        const todo = draft.todos.find((todo) => todo.id === id);
+        todo.done = !todo.done;
+      }),
+    [REMOVE]: (state, action) =>
+      produce(state, (draft) => {
+        const index = draft.todos.findIndex((todo) => todo.id === id);
+        draft.todos.splice(index, 1);
+      }),
   },
   initialState
 );

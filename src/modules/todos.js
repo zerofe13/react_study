@@ -46,7 +46,7 @@ const todos = handleActions(
         const todo = draft.todos.find((todo) => todo.id === id);
         todo.done = !todo.done;
       }),
-    [REMOVE]: (state, action) =>
+    [REMOVE]: (state, { payload: id }) =>
       produce(state, (draft) => {
         const index = draft.todos.findIndex((todo) => todo.id === id);
         draft.todos.splice(index, 1);

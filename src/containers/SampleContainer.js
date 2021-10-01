@@ -27,7 +27,7 @@ const SampleContainer = ({
 };
 export default connect(
   ({ sample }) => ({
-    post: sample.psot,
+    post: sample.post,
     users: sample.users,
     loadingPost: sample.loading.GET_POST,
     loadingUsers: sample.loading.GET_USERS,

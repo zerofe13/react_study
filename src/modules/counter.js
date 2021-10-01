@@ -10,9 +10,16 @@ const initialState = {
   number: 0,
 };
 
+//   switch (action.type) {
+//     case INCREASE:
+//       return {
+//         number: state.number + 1,
+//       };
+
+// [acion.type] :(state,action)
 const counter = handleActions(
   {
-    [INCREASE]: (state, action) => ({ number: state.number + 1 }),
+    [INCREASE]: (state) => ({ number: state.number + 1 }),
     [DECREASE]: (state, action) => ({ number: state.number - 1 }),
   },
   initialState

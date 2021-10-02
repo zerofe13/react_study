@@ -1,8 +1,11 @@
+import { startLoading, finishLoading } from '../modules/loading';
+
 export default function createRequestThunk(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return (params) => async (dispatch) => {
     dispatch({ type });
+    dispatch(finishLoading(type));
     try {
       const response = await request(params);
       dispatch({
@@ -15,6 +18,7 @@ export default function createRequestThunk(type, request) {
         payload: e,
         error: true,
       });
+      dispatch(startLoading(type)); //에러가 발생하면 로딩
       throw e;
     }
   };
